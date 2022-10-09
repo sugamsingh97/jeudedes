@@ -8,7 +8,7 @@ let activePlayer;
 let gameRunning = false;
 document.getElementById("active1").style.display = "none";
 document.getElementById("active2").style.display = "none";
-
+startGame();
 function startGame() {
     p1CurrentScore = 0;
     p2CurrentScore = 0;
@@ -67,7 +67,29 @@ function throwDice() {
 
 //hold round transfer la valeur de des au score du joueur
 function holdRound() {
-    
+    if (activePlayer === "p1") {
+        p1TotalScore += p1CurrentScore;
+        p1CurrentScore = 0;
+        document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+        document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
+        if (p1TotalScore >= 100) {
+            //p1 won - to do
+        } else {
+            next();
+        }
+        
+    } else {
+        p2TotalScore += p2CurrentScore;
+        p2CurrentScore = 0;
+        document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+        document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
+        if (p2TotalScore >= 100) {
+            // to do p2 won
+        }
+        else {
+            next();
+        }
+    }
 }
 
 //restart game
