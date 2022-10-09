@@ -4,7 +4,7 @@ let p1TotalScore;
 let p2TotalScore;
 let p1CurrentScore;
 let p2CurrentScore;
-let activePlayer = null;
+let activePlayer;
 let gameRunning = false;
 document.getElementById("active1").style.display = "none";
 document.getElementById("active2").style.display = "none";
@@ -21,13 +21,47 @@ function startGame() {
     //set active player 1 on UI
     document.getElementById("active1").style.display = "block";
     document.getElementById("active2").style.display = "none";
-    //document.getElementById("game").innerHTML += throwDice().toString();
+    //setting ui reset values
+    document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+    document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+    document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
+    document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
 }
 
 //lancement des des
 function throwDice() {
+    
     let diceValue = Math.floor(Math.random() * 6) + 1;
-    return diceValue === 1 ? 0 : diceValue;
+    if (diceValue === 1) {
+        document.getElementById("des").style.display = "none";
+        if (activePlayer === "p1") {
+            p1CurrentScore = 0;
+            document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+        } 
+        if(activePlayer === "p2") {
+            debugger;
+            p2CurrentScore = 0;
+            document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+        }
+        debugger;
+        next();
+    } else {
+        if (activePlayer === "p1") {
+            
+            p1CurrentScore = p1CurrentScore + diceValue;
+            document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+        } 
+        if(activePlayer === "p2") {
+            debugger;
+            p2CurrentScore = p2CurrentScore + diceValue;
+            document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+        }
+        
+        document.getElementById("des").innerHTML = diceValue.toString();
+        document.getElementById("des").style.display = "block";
+        
+    }
+    //diceValue === 1 ? document.getElementById("des").style.display = "none" : document.getElementById("des").innerHTML = diceValue.toString();
 }
 
 
@@ -39,5 +73,19 @@ function holdRound() {
 //restart game
 function resetGame() {
     
+}
+
+//Next player
+function next() {
+
+    if (activePlayer === "p1") {
+        activePlayer = "p2"
+        document.getElementById("active2").style.display = "block";
+        document.getElementById("active1").style.display = "none";
+    } else {
+        activePlayer = "p1"
+        document.getElementById("active1").style.display = "block";
+        document.getElementById("active2").style.display = "none";
+    }
 }
 
