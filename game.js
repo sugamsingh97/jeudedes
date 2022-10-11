@@ -1,66 +1,65 @@
 //jeu de des
 //initialisation du jeu
-debugger;
-const Player = new Object();
-Player.name = "p1";
-Player.currentScore = 0;
-Player.totalScore = 0;
-
-
+const Player = [{
+    name: "p1",
+    currentScore: 0,
+    totalScore: 0,
+    active: false
+},
+{
+    name: "p2",
+    currentScore: 0,
+    totalScore: 0,
+    active: false
+}];
 let dice;
 let gameRunning = false;
-document.getElementById("active1").style.display = "none";
-document.getElementById("active2").style.display = "none";
-document.getElementById("hold").disabled = "true";
+initialiseUi();
 startGame();
+
 function startGame() {
-    p1CurrentScore = 0;
-    p2CurrentScore = 0;
-    p1TotalScore = 0;
-    p2TotalScore = 0;
-    activePlayer = "p1";
+    reset();
     gameRunning = true;
     //hide dice faut faire
-    document.getElementById("des").style.display = "none";
+    hideDice();
     //set active player 1 on UI
-    document.getElementById("active1").style.display = "block";
-    document.getElementById("active2").style.display = "none";
+    setActivePlayer(Player[0]);
     //setting ui reset values
-    document.getElementById("p1c").innerHTML = p1CurrentScore;
-    document.getElementById("p2c").innerHTML = p2CurrentScore;
-    document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
-    document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
+    setCurrentScore(Player[0], Player[0].currentScore);
+    setCurrentScore(Player[1], Player[1].currentScore);
+    setTotalScore(Player[0], Player[0].totalScore);
+    setTotalScore(Player[1], Player[1].totalScore);
     //debugger;
 }
+
+
 
 //lancement des des
 function throwDice() {
     
     let diceValue = Math.floor(Math.random() * 6) + 1;
     if (diceValue === 1) {
-        document.getElementById("des").style.display = "none";
-        if (activePlayer === "p1") {
-            p1CurrentScore = 0;
-            document.getElementById("p1c").innerHTML = p1CurrentScore;
+        hideDice();
+
+        if (Player[0].active) {
+            setCurrentScore(Player[0], 0);
             document.getElementById("hold").disabled = true;
         } 
-        if(activePlayer === "p2") {
-            p2CurrentScore = 0;
-            document.getElementById("p2c").innerHTML = p2CurrentScore;
+        if(Player[1].active) {
+            setCurrentScore(Player[1], 0);
             document.getElementById("hold").disabled = true;
         }
         next();
     } else {
         //debugger;
-        if (activePlayer === "p1") {
-            
-            p1CurrentScore = p1CurrentScore + diceValue;
-            document.getElementById("p1c").innerHTML = p1CurrentScore;
+        if (Player[0].active) {
+            Player[0].currentScore += diceValue;
+            setCurrentScore(Player[0], Player[0].currentScore);
             document.getElementById("hold").disabled = false;
         } 
-        if(activePlayer === "p2") {
-            p2CurrentScore = p2CurrentScore + diceValue;
-            document.getElementById("p2c").innerHTML = p2CurrentScore;
+        if(Player[1].active) {
+            Player[1].currentScore += diceValue;
+            setCurrentScore(Player[1], Player[1].currentScore);
             document.getElementById("hold").disabled = false;
         }
         
@@ -74,14 +73,14 @@ function throwDice() {
 
 //hold round transfer la valeur de des au score du joueur
 function holdRound() {
-    if (activePlayer === "p1") {
-        p1TotalScore += p1CurrentScore;
-        p1CurrentScore = 0;
+    if (Player[0].active) {
+        Player[0].totalScore += Player[0].currentScore;
+        Player[0].currentScore = 0;
         dice = 0;
         document.getElementById("des").innerHTML = dice;
-        document.getElementById("p1c").innerHTML = p1CurrentScore;
-        document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
-        if (p1TotalScore >= 100) {
+        setCurrentScore(Player[0], 0);
+        setTotalScore(Player[0], Player[0].totalScore);
+        if (Player[0].totalScore >= 100) {
             //p1 won - to do
         } else {
             document.getElementById("hold").disabled = true;
@@ -89,13 +88,13 @@ function holdRound() {
         }
         
     } else {
-        p2TotalScore += p2CurrentScore;
-        p2CurrentScore = 0;
+        Player[1].totalScore += Player[1].currentScore;
+        Player[1].currentScore = 0;
         dice = 0;
         document.getElementById("des").innerHTML = dice;
-        document.getElementById("p2c").innerHTML = p2CurrentScore;
-        document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
-        if (p2TotalScore >= 100) {
+        setCurrentScore(Player[1], 0);
+        setTotalScore(Player[1], Player[1].totalScore);
+        if (Player[1].totalScore >= 100) {
             // to do p2 won
         }
         else {
@@ -108,13 +107,73 @@ function holdRound() {
 //Next player
 function next() {
 
-    if (activePlayer === "p1") {
-        activePlayer = "p2"
-        document.getElementById("active2").style.display = "block";
-        document.getElementById("active1").style.display = "none";
+    if (Player[0].active) {
+        setActivePlayer(Player[1]);
     } else {
-        activePlayer = "p1"
-        document.getElementById("active1").style.display = "block";
-        document.getElementById("active2").style.display = "none";
+        setActivePlayer(Player[0]);
     }
+}
+function initialiseUi() {
+    document.getElementById("active1").style.display = "none";
+    document.getElementById("active2").style.display = "none";
+    document.getElementById("hold").disabled = true;
+    document.getElementById("newGame").disabled = true;
+}
+function reset() {
+    Player[0].active = true;
+    Player[0].totalScore = 0;
+    Player[0].currentScore = 0;
+    Player[1].active = false;
+    Player[1].totalScore = 0;
+    Player[1].currentScore = 0;
+}
+
+function setTotalScore(player, score) {
+    switch (player.name) {
+        case "p1":
+            document.getElementById("p1TotalScore").innerHTML = score;
+            break;
+        case "p2":
+            document.getElementById("p2TotalScore").innerHTML = score;
+            break;
+        default:
+            break;
+    }    
+}
+
+function setCurrentScore(player, score) {
+    switch (player.name) {
+        case "p1":
+            document.getElementById("p1c").innerHTML = score;
+            break;
+        case "p2":
+            document.getElementById("p2c").innerHTML = score;;
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+
+function setActivePlayer(player) {
+    debugger;
+    switch (player.name) {
+        case "p1":
+            document.getElementById("active1").style.display = "block";
+            document.getElementById("active2").style.display = "none";
+            player.active = true;
+            break;
+        case "p2":
+            document.getElementById("active2").style.display = "block";
+            document.getElementById("active1").style.display = "none";
+            player.active = true;
+            break;
+        default:
+            break;
+    }
+}
+
+function hideDice() {
+    document.getElementById("des").style.display = "none";
 }
