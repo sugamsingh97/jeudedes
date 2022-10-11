@@ -1,13 +1,17 @@
 //jeu de des
 //initialisation du jeu
-let p1TotalScore;
-let p2TotalScore;
-let p1CurrentScore;
-let p2CurrentScore;
-let activePlayer;
+debugger;
+const Player = new Object();
+Player.name = "p1";
+Player.currentScore = 0;
+Player.totalScore = 0;
+
+
+let dice;
 let gameRunning = false;
 document.getElementById("active1").style.display = "none";
 document.getElementById("active2").style.display = "none";
+document.getElementById("hold").disabled = "true";
 startGame();
 function startGame() {
     p1CurrentScore = 0;
@@ -22,10 +26,11 @@ function startGame() {
     document.getElementById("active1").style.display = "block";
     document.getElementById("active2").style.display = "none";
     //setting ui reset values
-    document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
-    document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+    document.getElementById("p1c").innerHTML = p1CurrentScore;
+    document.getElementById("p2c").innerHTML = p2CurrentScore;
     document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
     document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
+    //debugger;
 }
 
 //lancement des des
@@ -36,25 +41,27 @@ function throwDice() {
         document.getElementById("des").style.display = "none";
         if (activePlayer === "p1") {
             p1CurrentScore = 0;
-            document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+            document.getElementById("p1c").innerHTML = p1CurrentScore;
+            document.getElementById("hold").disabled = true;
         } 
         if(activePlayer === "p2") {
-            debugger;
             p2CurrentScore = 0;
-            document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+            document.getElementById("p2c").innerHTML = p2CurrentScore;
+            document.getElementById("hold").disabled = true;
         }
-        debugger;
         next();
     } else {
+        //debugger;
         if (activePlayer === "p1") {
             
             p1CurrentScore = p1CurrentScore + diceValue;
-            document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+            document.getElementById("p1c").innerHTML = p1CurrentScore;
+            document.getElementById("hold").disabled = false;
         } 
         if(activePlayer === "p2") {
-            debugger;
             p2CurrentScore = p2CurrentScore + diceValue;
-            document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+            document.getElementById("p2c").innerHTML = p2CurrentScore;
+            document.getElementById("hold").disabled = false;
         }
         
         document.getElementById("des").innerHTML = diceValue.toString();
@@ -70,31 +77,32 @@ function holdRound() {
     if (activePlayer === "p1") {
         p1TotalScore += p1CurrentScore;
         p1CurrentScore = 0;
-        document.getElementById("p1CurrentScore").innerHTML = p1CurrentScore;
+        dice = 0;
+        document.getElementById("des").innerHTML = dice;
+        document.getElementById("p1c").innerHTML = p1CurrentScore;
         document.getElementById("p1TotalScore").innerHTML = p1TotalScore;
         if (p1TotalScore >= 100) {
             //p1 won - to do
         } else {
+            document.getElementById("hold").disabled = true;
             next();
         }
         
     } else {
         p2TotalScore += p2CurrentScore;
         p2CurrentScore = 0;
-        document.getElementById("p2CurrentScore").innerHTML = p2CurrentScore;
+        dice = 0;
+        document.getElementById("des").innerHTML = dice;
+        document.getElementById("p2c").innerHTML = p2CurrentScore;
         document.getElementById("p2TotalScore").innerHTML = p2TotalScore;
         if (p2TotalScore >= 100) {
             // to do p2 won
         }
         else {
+            document.getElementById("hold").disabled = true;
             next();
         }
     }
-}
-
-//restart game
-function resetGame() {
-    
 }
 
 //Next player
@@ -110,4 +118,3 @@ function next() {
         document.getElementById("active2").style.display = "none";
     }
 }
-

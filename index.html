@@ -9,25 +9,25 @@
 </head>
 <body>
     <div id="game">
-        <div id="p1">
+        <div id="p1" class="item">
             <h1>Player 1</h1>
             <h2 id="active1">(active)</h2>
-            <div id="p1TotalScore"></div>
-            <div id="p1CurrentScore"></div>
+            <div id="p1TotalScore">abc</div>
+            <div id="p1CurrentScore"><span>Current</span><br><div id="p1c"></div></div>
         </div>
-        <div id="middle">
+        <div id="middle" class="item">
             <button id="newGame" onclick="startGame()">New Game</button>
             <br>
-            <div id="des">dice</div>
+            <div id="des" class="item" style="margin-top:2rem">dice</div>
             <button id="rollDice" onclick="throwDice()">Roll dice</button>
             <br>
             <button id="hold" onclick="holdRound()">Hold</button>
         </div>
-        <div id="p2">
+        <div id="p2" class="item">
             <h1>Player 2</h1>
             <h2 id="active2">(active)</h2>
-            <div id="p2TotalScore"></div>
-            <div id="p2CurrentScore"></div>
+            <div id="p2TotalScore">def</div>
+            <div id="p2CurrentScore"><span>Current</span><br><div id="p2c"></div></div>
         </div>
     </div>
     <script src="game.js"></script>
