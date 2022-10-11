@@ -14,6 +14,13 @@ const Player = [{
 }];
 let dice;
 let gameRunning = false;
+//dice
+const diceOne = "<div class='dice first-face'><span class='dot'></span></div>";
+const diceTwo = "<div class='dice second-face'><span class='dot'></span><span class='dot'></span></div>";
+const diceThree = "<div class='dice third-face'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div>";
+const diceFour = "<div class='fourth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span></div></div>";
+const diceFive = "<div class='fifth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span></div></div>";
+const diceSix = "<div class='sixth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div></div>";
 
 initialiseUi();
 startGame();
@@ -21,8 +28,6 @@ startGame();
 function startGame() {
     reset();
     gameRunning = true;
-    //hide dice faut faire
-    hideDice();
     //set active player 1 on UI
     setActivePlayer(Player[0],Player);
     //setting ui reset values
@@ -41,7 +46,6 @@ function throwDice() {
     document.getElementById("newGame").disabled = false;
     let diceValue = Math.floor(Math.random() * 6) + 1;
     if (diceValue === 1) {
-        hideDice();
 
         if (Player[0].active) {
             setCurrentScore(Player[0], 0);
@@ -53,21 +57,82 @@ function throwDice() {
         }
         next();
     } else {
-        //debugger;
-        if (Player[0].active) {
-            Player[0].currentScore += diceValue;
-            setCurrentScore(Player[0], Player[0].currentScore);
-            document.getElementById("hold").disabled = false;
-        } 
-        if(Player[1].active) {
-            Player[1].currentScore += diceValue;
-            setCurrentScore(Player[1], Player[1].currentScore);
-            document.getElementById("hold").disabled = false;
+        switch (diceValue) {
+            case 1:
+                if (Player[0].active) {
+                    setCurrentScore(Player[0], 0);
+                    document.getElementById("hold").disabled = true;
+                } 
+                if(Player[1].active) {
+                    setCurrentScore(Player[1], 0);
+                    document.getElementById("hold").disabled = true;
+                }
+                next();
+                break;
+            case 2:
+                document.getElementById("des").innerHTML = diceTwo;
+                if (Player[0].active) {
+                    Player[0].currentScore += diceValue;
+                    setCurrentScore(Player[0], Player[0].currentScore);
+                    document.getElementById("hold").disabled = false;
+                } else {
+                    Player[1].currentScore += diceValue;
+                    setCurrentScore(Player[1], Player[1].currentScore);
+                    document.getElementById("hold").disabled = false;
+                }
+                break;
+            case 3:
+                document.getElementById("des").innerHTML = diceThree;
+                if (Player[0].active) {
+                    Player[0].currentScore += diceValue;
+                    setCurrentScore(Player[0], Player[0].currentScore);
+                    document.getElementById("hold").disabled = false;
+                } else {
+                    Player[1].currentScore += diceValue;
+                    setCurrentScore(Player[1], Player[1].currentScore);
+                    document.getElementById("hold").disabled = false;
+                }
+                break;
+            case 4:
+                document.getElementById("des").innerHTML = diceFour;
+                if (Player[0].active) {
+                    Player[0].currentScore += diceValue;
+                    setCurrentScore(Player[0], Player[0].currentScore);
+                    document.getElementById("hold").disabled = false;
+                } else {
+                    Player[1].currentScore += diceValue;
+                    setCurrentScore(Player[1], Player[1].currentScore);
+                    document.getElementById("hold").disabled = false;
+                }
+                break;
+            case 5:
+                document.getElementById("des").innerHTML = diceFive;
+                if (Player[0].active) {
+                    Player[0].currentScore += diceValue;
+                    setCurrentScore(Player[0], Player[0].currentScore);
+                    document.getElementById("hold").disabled = false;
+                } else {
+                    Player[1].currentScore += diceValue;
+                    setCurrentScore(Player[1], Player[1].currentScore);
+                    document.getElementById("hold").disabled = false;
+                }
+                break;
+            case 6:
+                document.getElementById("des").innerHTML = diceSix;
+                if (Player[0].active) {
+                    Player[0].currentScore += diceValue;
+                    setCurrentScore(Player[0], Player[0].currentScore);
+                    document.getElementById("hold").disabled = false;
+                } else {
+                    Player[1].currentScore += diceValue;
+                    setCurrentScore(Player[1], Player[1].currentScore);
+                    document.getElementById("hold").disabled = false;
+                }
+                break;
+
+            default:
+                break;
         }
-        
-        document.getElementById("des").innerHTML = diceValue.toString();
-        document.getElementById("des").style.display = "block";
-        
     }
     //diceValue === 1 ? document.getElementById("des").style.display = "none" : document.getElementById("des").innerHTML = diceValue.toString();
 }
@@ -167,7 +232,7 @@ function setCurrentScore(player, score) {
 }
 
 function setActivePlayer(player, objplayer) {
-    debugger;
+    //debugger;
     switch (player.name) {
         case "p1":
             document.getElementById("active1").style.display = "inline";
