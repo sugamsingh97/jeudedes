@@ -12,13 +12,6 @@ html, body {
     justify-content: center;
 }
 
-#middle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .item {
     flex-grow: 1;
 }
@@ -44,6 +37,16 @@ html, body {
     text-transform: uppercase;
     font-size: 34px;
 }
-#p1 {
-    height: 100vh;
+*/
+#p1, #p2, #middle {
+    display: flex;
+    height: 70vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#active1, #active2 {
+    display: inline;
+    color: rgb(0, 255, 76);
 }

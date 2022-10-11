@@ -14,6 +14,7 @@ const Player = [{
 }];
 let dice;
 let gameRunning = false;
+
 initialiseUi();
 startGame();
 
@@ -23,7 +24,7 @@ function startGame() {
     //hide dice faut faire
     hideDice();
     //set active player 1 on UI
-    setActivePlayer(Player[0]);
+    setActivePlayer(Player[0],Player);
     //setting ui reset values
     setCurrentScore(Player[0], Player[0].currentScore);
     setCurrentScore(Player[1], Player[1].currentScore);
@@ -37,6 +38,7 @@ function startGame() {
 //lancement des des
 function throwDice() {
     
+    document.getElementById("newGame").disabled = false;
     let diceValue = Math.floor(Math.random() * 6) + 1;
     if (diceValue === 1) {
         hideDice();
@@ -81,7 +83,11 @@ function holdRound() {
         setCurrentScore(Player[0], 0);
         setTotalScore(Player[0], Player[0].totalScore);
         if (Player[0].totalScore >= 100) {
-            //p1 won - to do
+            // to do p1 won
+            document.getElementById("active1").classList.remove("material-icons");
+            document.getElementById("active1").innerHTML = "a gagne";
+            document.getElementById("hold").disabled = true;
+            document.getElementById("rollDice").disabled = true;
         } else {
             document.getElementById("hold").disabled = true;
             next();
@@ -96,6 +102,10 @@ function holdRound() {
         setTotalScore(Player[1], Player[1].totalScore);
         if (Player[1].totalScore >= 100) {
             // to do p2 won
+            document.getElementById("active2").classList.remove("material-icons");
+            document.getElementById("active2").innerHTML = "a gagne";
+            document.getElementById("hold").disabled = true;
+            document.getElementById("rollDice").disabled = true;
         }
         else {
             document.getElementById("hold").disabled = true;
@@ -108,9 +118,9 @@ function holdRound() {
 function next() {
 
     if (Player[0].active) {
-        setActivePlayer(Player[1]);
+        setActivePlayer(Player[1],Player);
     } else {
-        setActivePlayer(Player[0]);
+        setActivePlayer(Player[0],Player);
     }
 }
 function initialiseUi() {
@@ -156,18 +166,20 @@ function setCurrentScore(player, score) {
     
 }
 
-function setActivePlayer(player) {
+function setActivePlayer(player, objplayer) {
     debugger;
     switch (player.name) {
         case "p1":
-            document.getElementById("active1").style.display = "block";
+            document.getElementById("active1").style.display = "inline";
             document.getElementById("active2").style.display = "none";
             player.active = true;
+            objplayer[1].active = false;
             break;
         case "p2":
-            document.getElementById("active2").style.display = "block";
+            document.getElementById("active2").style.display = "inline";
             document.getElementById("active1").style.display = "none";
             player.active = true;
+            objplayer[0].active = false;
             break;
         default:
             break;

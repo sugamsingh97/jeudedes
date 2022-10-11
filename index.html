@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de dés</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="game">
         <div id="p1" class="item">
-            <h1>Player 1</h1>
-            <h2 id="active1">(active)</h2>
+            <h1>Player 1&nbsp;&nbsp;<span id="active1" class="material-icons">fiber_manual_record</span></h1>
             <div id="p1TotalScore">abc</div>
             <div id="p1CurrentScore"><span>Current</span><br><div id="p1c"></div></div>
         </div>
@@ -24,8 +24,7 @@
             <button id="hold" onclick="holdRound()">Hold</button>
         </div>
         <div id="p2" class="item">
-            <h1>Player 2</h1>
-            <h2 id="active2">(active)</h2>
+            <h1>Player 2&nbsp;&nbsp;<span id="active2" class="material-icons">fiber_manual_record</span></h1>
             <div id="p2TotalScore">def</div>
             <div id="p2CurrentScore"><span>Current</span><br><div id="p2c"></div></div>
         </div>
