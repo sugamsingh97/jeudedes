@@ -3,13 +3,21 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #59744D;
+}
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 55px;
+    color: #F3B950;
 }
 
 #game {
-    margin: 1rem;
+    margin: 5rem;
+    padding: 2rem;
     display: flex;
     text-align: center;
     justify-content: center;
+    background-color: #ffffff;
 }
 
 .item {
@@ -44,6 +52,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #active1, #active2 {
@@ -59,7 +68,7 @@ html, body {
   }
   .dice {
     padding: 4px;
-    background-color: tomato;
+    background-color: #ff6347;
     width: 104px;
     height: 104px;
     border-radius: 10%;
