@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de dés</title>
+   
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -12,24 +13,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="game">
-        <div id="p1" class="item">
+        <div id="p1" class="item Panel1">
             <h1>Player 1&nbsp;&nbsp;<span id="active1" class="material-icons">fiber_manual_record</span></h1>
             <div id="p1TotalScore">abc</div>
             <div id="p1CurrentScore"><span>Current</span><br><div id="p1c"></div></div>
         </div>
         <div id="middle" class="item">
-            <button id="newGame" onclick="startGame()">New Game</button>
-            <br>
+            <button id="newGame" class="button" onclick="startGame()"><span class="material-symbols-outlined icons">restart_alt</span>&nbsp;&nbsp;NEW GAME</button>
             <div id="des" class="item" style="margin-top:2rem"></div>
-            <button id="rollDice" onclick="throwDice()">Roll dice</button>
+            <button id="rollDice" class="button icons" onclick="throwDice()"><span class="material-symbols-outlined icons">touch_app</span>&nbsp;&nbsp;ROLL DICE</button>
             <br>
-            <button id="hold" onclick="holdRound()">Hold</button>
+            <button id="hold" class="button icons" onclick="holdRound()"><span class="material-symbols-outlined icons">add_circle</span>&nbsp;&nbsp;HOLD</button>
         </div>
-        <div id="p2" class="item">
+        <div id="p2" class="item Panel1">
             <h1>Player 2&nbsp;&nbsp;<span id="active2" class="material-icons">fiber_manual_record</span></h1>
             <div id="p2TotalScore">def</div>
             <div id="p2CurrentScore"><span>Current</span><br><div id="p2c"></div></div>
