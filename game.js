@@ -35,6 +35,7 @@ function startGame() {
     setCurrentScore(Player[1], Player[1].currentScore);
     setTotalScore(Player[0], Player[0].totalScore);
     setTotalScore(Player[1], Player[1].totalScore);
+    //document.getElementById("rollDice").disabled = false;
     //debugger;
 }
 
@@ -144,15 +145,17 @@ function holdRound() {
         Player[0].totalScore += Player[0].currentScore;
         Player[0].currentScore = 0;
         dice = 0;
-        document.getElementById("des").innerHTML = dice;
+        document.getElementById("des").innerHTML = " ";
         setCurrentScore(Player[0], 0);
         setTotalScore(Player[0], Player[0].totalScore);
-        if (Player[0].totalScore >= 100) {
+        if (Player[0].totalScore >= 10) {
+           // debugger;
             // to do p1 won
             document.getElementById("active1").classList.remove("material-icons");
-            document.getElementById("active1").innerHTML = "a gagne";
+            document.getElementById("active1").innerHTML = "a gagné !";
             document.getElementById("hold").disabled = true;
             document.getElementById("rollDice").disabled = true;
+            
         } else {
             document.getElementById("hold").disabled = true;
             next();
@@ -162,15 +165,17 @@ function holdRound() {
         Player[1].totalScore += Player[1].currentScore;
         Player[1].currentScore = 0;
         dice = 0;
-        document.getElementById("des").innerHTML = dice;
+        document.getElementById("des").innerHTML = " ";
         setCurrentScore(Player[1], 0);
         setTotalScore(Player[1], Player[1].totalScore);
-        if (Player[1].totalScore >= 100) {
+        if (Player[1].totalScore >= 10) {
             // to do p2 won
+            // debugger;
             document.getElementById("active2").classList.remove("material-icons");
-            document.getElementById("active2").innerHTML = "a gagne";
+            document.getElementById("active2").innerHTML = "a gagné !";
             document.getElementById("hold").disabled = true;
             document.getElementById("rollDice").disabled = true;
+            
         }
         else {
             document.getElementById("hold").disabled = true;
@@ -184,8 +189,12 @@ function next() {
 
     if (Player[0].active) {
         setActivePlayer(Player[1],Player);
+        Player[0].currentScore = 0;
+        document.getElementById("p1c").innerHTML = Player[0].currentScore;
     } else {
         setActivePlayer(Player[0],Player);
+        Player[1].currentScore = 0;
+        document.getElementById("p2c").innerHTML = Player[1].currentScore;
     }
 }
 function initialiseUi() {
@@ -201,6 +210,9 @@ function reset() {
     Player[1].active = false;
     Player[1].totalScore = 0;
     Player[1].currentScore = 0;
+    document.getElementById("rollDice").disabled = false;
+    document.getElementById("active1").classList.add("material-icons");
+    document.getElementById("active2").classList.add("material-icons");
 }
 
 function setTotalScore(player, score) {
@@ -237,12 +249,14 @@ function setActivePlayer(player, objplayer) {
         case "p1":
             document.getElementById("active1").style.display = "inline";
             document.getElementById("active2").style.display = "none";
+            document.getElementById("active1").innerHTML = "fiber_manual_record"
             player.active = true;
             objplayer[1].active = false;
             break;
         case "p2":
             document.getElementById("active2").style.display = "inline";
             document.getElementById("active1").style.display = "none";
+            document.getElementById("active1").innerHTML = "fiber_manual_record"
             player.active = true;
             objplayer[0].active = false;
             break;
