@@ -6,9 +6,9 @@ html, body {
     background-color: #59744D;
 }
 h1 {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Montserrat', sans-serif;
     font-size: 55px;
-    color: #F3B950;
+    color: #fa7f5a;
 }
 
 #game {
@@ -45,9 +45,6 @@ button {
     cursor: pointer;
     font-weight: 250;
 }
-.newGame {
-    color: green;
-}
 
 .icons {
     vertical-align: sub;
@@ -58,7 +55,7 @@ button {
    font-size: 40px;
    color: #2c2c2c;
 }
-#p1, #p2, #middle {
+#p1, #p2 {
     width: 1000px;
     display: flex;
     font-size: 35px;
@@ -69,17 +66,32 @@ button {
     font-family: 'Montserrat', sans-serif;
 }
 
+#middle {
+  width: 600px;
+  display: flex;
+  font-size: 35px;
+  height: 70vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: 'Montserrat', sans-serif;
+}
+
 #p1, #p2 {
     color: #59744D;
 }
 
 #active1, #active2 {
     display: inline;
-    color: rgb(0, 255, 76);
+    color: #00ff4c;
 }
 
 .panel1, .panel2 {
     background-color: #fa7f5a;
+}
+
+.backgroundActive1, .backgroundActive2 {
+  background-color: #98979744;
 }
 
 /*dice css*/
@@ -90,7 +102,15 @@ button {
   }
   .dice {
     padding: 4px;
-    background-color: #fa7f5a;
+    background-color: #5aa7fa; 
+    width: 104px;
+    height: 104px;
+    border-radius: 10%;
+    margin-right : 10px;
+  }
+  .dice-red {
+    padding: 4px;
+    background-color: #ff0000;
     width: 104px;
     height: 104px;
     border-radius: 10%;
@@ -147,7 +167,7 @@ button {
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: linear-gradient(top, #222, #333);
     height: 112px;
   }

@@ -15,7 +15,7 @@ const Player = [{
 let dice;
 let gameRunning = false;
 //dice
-const diceOne = "<div class='dice first-face'><span class='dot'></span></div>";
+const diceOne = "<div class='dice-red first-face'><span class='dot'></span></div>";
 const diceTwo = "<div class='dice second-face'><span class='dot'></span><span class='dot'></span></div>";
 const diceThree = "<div class='dice third-face'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div>";
 const diceFour = "<div class='fourth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span></div></div>";
@@ -47,87 +47,89 @@ function throwDice() {
     document.getElementById("newGame").disabled = false;
     let diceValue = Math.floor(Math.random() * 6) + 1;
     if (diceValue === 1) {
-
+        setDice(diceOne);
         if (Player[0].active) {
             setCurrentScore(Player[0], 0);
-            document.getElementById("hold").disabled = true;
+            disableButton(document.getElementById("hold"));
         } 
         if(Player[1].active) {
             setCurrentScore(Player[1], 0);
-            document.getElementById("hold").disabled = true;
+            disableButton(document.getElementById("hold"));
         }
         next();
     } else {
         switch (diceValue) {
             case 1:
+                setDice(diceOne);
                 if (Player[0].active) {
                     setCurrentScore(Player[0], 0);
-                    document.getElementById("hold").disabled = true;
+                    disableButton(document.getElementById("hold"));
                 } 
                 if(Player[1].active) {
                     setCurrentScore(Player[1], 0);
-                    document.getElementById("hold").disabled = true;
+                    disableButton(document.getElementById("hold"));
                 }
                 next();
                 break;
             case 2:
-                document.getElementById("des").innerHTML = diceTwo;
+                setDice(diceTwo);
                 if (Player[0].active) {
                     Player[0].currentScore += diceValue;
                     setCurrentScore(Player[0], Player[0].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 } else {
                     Player[1].currentScore += diceValue;
                     setCurrentScore(Player[1], Player[1].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 }
                 break;
             case 3:
-                document.getElementById("des").innerHTML = diceThree;
+                setDice(diceThree);
                 if (Player[0].active) {
                     Player[0].currentScore += diceValue;
                     setCurrentScore(Player[0], Player[0].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 } else {
                     Player[1].currentScore += diceValue;
                     setCurrentScore(Player[1], Player[1].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 }
                 break;
             case 4:
-                document.getElementById("des").innerHTML = diceFour;
+                setDice(diceFour);
                 if (Player[0].active) {
                     Player[0].currentScore += diceValue;
                     setCurrentScore(Player[0], Player[0].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 } else {
                     Player[1].currentScore += diceValue;
                     setCurrentScore(Player[1], Player[1].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 }
                 break;
             case 5:
-                document.getElementById("des").innerHTML = diceFive;
+                setDice(diceFive);
                 if (Player[0].active) {
                     Player[0].currentScore += diceValue;
                     setCurrentScore(Player[0], Player[0].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 } else {
                     Player[1].currentScore += diceValue;
                     setCurrentScore(Player[1], Player[1].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 }
                 break;
             case 6:
+                setDice(diceSix);
                 document.getElementById("des").innerHTML = diceSix;
                 if (Player[0].active) {
                     Player[0].currentScore += diceValue;
                     setCurrentScore(Player[0], Player[0].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 } else {
                     Player[1].currentScore += diceValue;
                     setCurrentScore(Player[1], Player[1].currentScore);
-                    document.getElementById("hold").disabled = false;
+                    enableButton(document.getElementById("hold"));
                 }
                 break;
 
@@ -139,6 +141,12 @@ function throwDice() {
 }
 
 
+function disableButton(button) {
+    button.disabled = true;
+}
+function enableButton(button) {
+    button.disabled = false;
+}
 //hold round transfer la valeur de des au score du joueur
 function holdRound() {
     if (Player[0].active) {
@@ -173,12 +181,11 @@ function holdRound() {
             // debugger;
             document.getElementById("active2").classList.remove("material-icons");
             document.getElementById("active2").innerHTML = "a gagné !";
-            document.getElementById("hold").disabled = true;
-            document.getElementById("rollDice").disabled = true;
-            
+            disableButton(document.getElementById("hold"));
+            disableButton(document.getElementById("rollDice"));
         }
         else {
-            document.getElementById("hold").disabled = true;
+            disableButton(document.getElementById("hold"));
             next();
         }
     }
@@ -200,8 +207,8 @@ function next() {
 function initialiseUi() {
     document.getElementById("active1").style.display = "none";
     document.getElementById("active2").style.display = "none";
-    document.getElementById("hold").disabled = true;
-    document.getElementById("newGame").disabled = true;
+    disableButton(document.getElementById("hold"));
+    disableButton(document.getElementById("newGame"));
 }
 function reset() {
     Player[0].active = true;
@@ -210,9 +217,11 @@ function reset() {
     Player[1].active = false;
     Player[1].totalScore = 0;
     Player[1].currentScore = 0;
-    document.getElementById("rollDice").disabled = false;
+    enableButton(document.getElementById("rollDice"));
     document.getElementById("active1").classList.add("material-icons");
     document.getElementById("active2").classList.add("material-icons");
+    document.getElementById("active1").innerHTML = "fiber_manual_record";
+    document.getElementById("active2").innerHTML = "fiber_manual_record";
 }
 
 function setTotalScore(player, score) {
@@ -244,12 +253,14 @@ function setCurrentScore(player, score) {
 }
 
 function setActivePlayer(player, objplayer) {
-    //debugger;
+    debugger;
     switch (player.name) {
         case "p1":
             document.getElementById("active1").style.display = "inline";
             document.getElementById("active2").style.display = "none";
             document.getElementById("active1").innerHTML = "fiber_manual_record"
+            document.getElementById("p2").classList.remove("backgroundActive2");
+            document.getElementById("p1").classList.add("backgroundActive1");
             player.active = true;
             objplayer[1].active = false;
             break;
@@ -257,6 +268,8 @@ function setActivePlayer(player, objplayer) {
             document.getElementById("active2").style.display = "inline";
             document.getElementById("active1").style.display = "none";
             document.getElementById("active1").innerHTML = "fiber_manual_record"
+            document.getElementById("p1").classList.remove("backgroundActive1");
+            document.getElementById("p2").classList.add("backgroundActive2");
             player.active = true;
             objplayer[0].active = false;
             break;
@@ -267,4 +280,9 @@ function setActivePlayer(player, objplayer) {
 
 function hideDice() {
     document.getElementById("des").style.display = "none";
+}
+
+
+function setDice(diceDigit) {
+  document.getElementById("des").innerHTML = diceDigit;
 }
