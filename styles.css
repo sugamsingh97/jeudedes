@@ -3,16 +3,21 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #59744D;
+    top: 0;
+    bottom: 0;
+}
+/* rough*/
+.container-fluid {
+  width: 100%;
 }
 h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 55px;
+    font-size: 0.7em;
     color: #fa7f5a;
 }
 
 #game {
-    margin: 5rem;
+    margin-top: 2rem;
     padding: 2rem;
     display: flex;
     text-align: center;
@@ -29,21 +34,21 @@ h1 {
 }
 
 /* buttons css */
+
+
+
 .material-symbols-outlined {
-      font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 48
-    }
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
 
 button {
-    font-size: 20px;
-    width: 200px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-weight: 250;
+  
+  margin: 4px;
+  width: -webkit-fill-available;
 }
 
 .icons {
@@ -52,30 +57,21 @@ button {
  
 
 #p1CurrentScore span, #p2CurrentScore span {
-   font-size: 40px;
+   font-size: 0.7em;
    color: #2c2c2c;
 }
 #p1, #p2 {
-    width: 1000px;
+    text-align: center;
     display: flex;
-    font-size: 35px;
-    height: 70vh;
+    font-size: 2.3em;
+    height: 45vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     font-family: 'Montserrat', sans-serif;
 }
 
-#middle {
-  width: 600px;
-  display: flex;
-  font-size: 35px;
-  height: 70vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  font-family: 'Montserrat', sans-serif;
-}
+
 
 #p1, #p2 {
     color: #59744D;

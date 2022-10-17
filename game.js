@@ -253,7 +253,7 @@ function setCurrentScore(player, score) {
 }
 
 function setActivePlayer(player, objplayer) {
-    debugger;
+    //debugger;
     switch (player.name) {
         case "p1":
             document.getElementById("active1").style.display = "inline";
