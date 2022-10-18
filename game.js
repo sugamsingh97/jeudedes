@@ -22,6 +22,13 @@ const diceFour = "<div class='fourth-face dice'><div class='column'><span class=
 const diceFive = "<div class='fifth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span></div></div>";
 const diceSix = "<div class='sixth-face dice'><div class='column'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div><div class='column'><span class='dot'></span><span class='dot'></span><span class='dot'></span></div></div>";
 
+//you won message
+const modal = document.getElementById('modal');
+const openModal = document.querySelector('.open-button');
+const closeModal = document.querySelector('.close-button');
+
+
+
 initialiseUi();
 startGame();
 
@@ -36,6 +43,7 @@ function startGame() {
     setTotalScore(Player[0], Player[0].totalScore);
     setTotalScore(Player[1], Player[1].totalScore);
     //document.getElementById("rollDice").disabled = false;
+    enableButton(document.getElementById("rollDice"));
     //debugger;
 }
 
@@ -46,6 +54,9 @@ function throwDice() {
     
     document.getElementById("newGame").disabled = false;
     let diceValue = Math.floor(Math.random() * 6) + 1;
+    if (diceValue !== 1) {
+        enableButton(document.getElementById("hold"));
+    }
     if (diceValue === 1) {
         setDice(diceOne);
         if (Player[0].active) {
@@ -156,13 +167,12 @@ function holdRound() {
         document.getElementById("des").innerHTML = " ";
         setCurrentScore(Player[0], 0);
         setTotalScore(Player[0], Player[0].totalScore);
-        if (Player[0].totalScore >= 10) {
-           // debugger;
-            // to do p1 won
-            document.getElementById("active1").classList.remove("material-icons");
-            document.getElementById("active1").innerHTML = "a gagné !";
+        if (Player[0].totalScore >= 100) {
+            //p1 won
             document.getElementById("hold").disabled = true;
             document.getElementById("rollDice").disabled = true;
+            modalopen();
+            document.getElementById("winnerModalLabel").innerHTML = "Player 1";
             
         } else {
             document.getElementById("hold").disabled = true;
@@ -176,13 +186,12 @@ function holdRound() {
         document.getElementById("des").innerHTML = " ";
         setCurrentScore(Player[1], 0);
         setTotalScore(Player[1], Player[1].totalScore);
-        if (Player[1].totalScore >= 10) {
-            // to do p2 won
-            // debugger;
-            document.getElementById("active2").classList.remove("material-icons");
-            document.getElementById("active2").innerHTML = "a gagné !";
+        if (Player[1].totalScore >= 100) {
+            //won
             disableButton(document.getElementById("hold"));
             disableButton(document.getElementById("rollDice"));
+            modalopen();
+            document.getElementById("winnerModalLabel").innerHTML = "Player 2";
         }
         else {
             disableButton(document.getElementById("hold"));
@@ -217,7 +226,7 @@ function reset() {
     Player[1].active = false;
     Player[1].totalScore = 0;
     Player[1].currentScore = 0;
-    enableButton(document.getElementById("rollDice"));
+    disableButton(document.getElementById("rollDice"));
     document.getElementById("active1").classList.add("material-icons");
     document.getElementById("active2").classList.add("material-icons");
     document.getElementById("active1").innerHTML = "fiber_manual_record";
@@ -253,7 +262,6 @@ function setCurrentScore(player, score) {
 }
 
 function setActivePlayer(player, objplayer) {
-    //debugger;
     switch (player.name) {
         case "p1":
             document.getElementById("active1").style.display = "inline";
@@ -285,4 +293,19 @@ function hideDice() {
 
 function setDice(diceDigit) {
   document.getElementById("des").innerHTML = diceDigit;
+}
+function modalopen() {
+    const myModal = new bootstrap.Modal("#winnerModal", {
+        keyboard: false
+    });
+    // myModal.addEventListener("hidden.bs.modal", function () {
+    //     startGame();
+    // });
+    
+
+    myModal.show();
+    var modalEl = document.getElementById("winnerModal");
+    modalEl.addEventListener('hidden.bs.modal', function () {
+        startGame();
+    });
 }

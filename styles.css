@@ -167,3 +167,27 @@ button {
     background: linear-gradient(top, #222, #333);
     height: 112px;
   }
+ .modal-body {
+  font-size: 5em;
+  text-align: center;
+  color: #00ff4c;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+ }
+
+ @media (max-width: 530px) {
+  .dice, .dice-red {
+    padding: 4px;
+    background-color: #5aa7fa; 
+    width: 66px;
+    height: 66px;
+    border-radius: 10%;
+    margin-right : 10px;
+  }
+  .dot{
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color:white;
+  }
+}
