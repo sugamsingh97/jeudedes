@@ -187,7 +187,7 @@ function holdRound() {
         setCurrentScore(Player[1], 0);
         setTotalScore(Player[1], Player[1].totalScore);
         if (Player[1].totalScore >= 100) {
-            //won
+            // p2 won
             disableButton(document.getElementById("hold"));
             disableButton(document.getElementById("rollDice"));
             modalopen();
@@ -219,6 +219,7 @@ function initialiseUi() {
     disableButton(document.getElementById("hold"));
     disableButton(document.getElementById("newGame"));
 }
+//reset game
 function reset() {
     Player[0].active = true;
     Player[0].totalScore = 0;
@@ -232,7 +233,7 @@ function reset() {
     document.getElementById("active1").innerHTML = "fiber_manual_record";
     document.getElementById("active2").innerHTML = "fiber_manual_record";
 }
-
+ //set total score
 function setTotalScore(player, score) {
     switch (player.name) {
         case "p1":
@@ -246,6 +247,7 @@ function setTotalScore(player, score) {
     }    
 }
 
+//set current score
 function setCurrentScore(player, score) {
     switch (player.name) {
         case "p1":
@@ -261,6 +263,7 @@ function setCurrentScore(player, score) {
     
 }
 
+//set active player
 function setActivePlayer(player, objplayer) {
     switch (player.name) {
         case "p1":
@@ -285,24 +288,21 @@ function setActivePlayer(player, objplayer) {
             break;
     }
 }
-
+//hide dice 
 function hideDice() {
     document.getElementById("des").style.display = "none";
 }
 
-
+//set dice digit
 function setDice(diceDigit) {
   document.getElementById("des").innerHTML = diceDigit;
 }
+
+//pop up message
 function modalopen() {
     const myModal = new bootstrap.Modal("#winnerModal", {
         keyboard: false
     });
-    // myModal.addEventListener("hidden.bs.modal", function () {
-    //     startGame();
-    // });
-    
-
     myModal.show();
     var modalEl = document.getElementById("winnerModal");
     modalEl.addEventListener('hidden.bs.modal', function () {
